@@ -86,7 +86,7 @@ A predicate is declared as ``parameterName is Type``, where ``parameterName`` mu
 More example:
 Giving an **array zoo** of union Fish | Bird. Using **type guards isFish** to filter an array of Fish | Bird and obtain an array of Fish.
 
-```
+```bash
 type Fish = { swim: () => void };
 type Bird = { fly: () => void };
 type Pet = Fish | Bird  //union Pet
@@ -123,7 +123,7 @@ For a ***n*** **in** ***x*** expression, where ***n*** is a string literal or st
 - “false” branch narrows to types in union ***x*** which have an **optional** or **missing** property ***n***.
 
 
-```
+```bash
 function move(pet: Fish | Bird) {
   if ("swim" in pet) {
     return pet.swim();
@@ -134,7 +134,7 @@ function move(pet: Fish | Bird) {
 
 ### 1.2. typeof type guards
 Having to define a **type-predicate type guard** to figure out if a type is a primitive is **kind of a pain**.
-```
+```bash
 function isNumber(x: any): x is number {
   return typeof x === "number";
 }
@@ -143,7 +143,7 @@ function isString(x: any): x is string {
 }
 ```
 **Luckily**, TypeScript allows you to check inline the premitive types using ***typeof*** and will recognize this expression as a **type guard** on its own.
-```
+```bash
 function padLeft(value: string, padding: string | number) {
   if (typeof padding === "number") {   // mean padding is number
     return Array(padding + 1).join(" ") + value;
@@ -162,7 +162,7 @@ where "typename" can be one of typeof operator’s return predifined values **("
 ### 1.3. instanceof type guards
 instanceof type guards are a way of narrowing types using their **constructor function**:
 Declearation: **instanceof type guards** = **n** ***instanceof*** **AClassContructorFunction**
-```
+```bash
 class SpaceRepeatingPadder {
   constructor(private numSpaces: number) { }
   getPaddingStringBySpace() {
@@ -199,7 +199,7 @@ if (padder instanceof StringPadder) {
 By default, the **type checker** considers null and undefined assignable to anythin => null and undefined are valid values of every type. 
 The `--strictNullChecks` flag fixes this: when you declare a variable, it doesn’t automatically include null or undefined. You can include them **explicitly using a union type**:
 
-```
+```bash
 let exampleString = "foo";
 exampleString = null;
 Type 'null' is not assignable to type 'string'.
@@ -213,6 +213,7 @@ Type 'undefined' is not assignable to type 'string | null'.
 
 ### 2.1. Optional parameters and properties
 With --strictNullChecks, an ``optional`` parameter automatically adds | undefined:
+
 ```
 function f(x: number, y?: number) {
   return x + (y ?? 0);
@@ -225,7 +226,7 @@ f(1, null);
 Argument of type 'null' is not assignable to parameter of type 'number | undefined'.
 ```
 The same is true for optional properties:
-```
+```bash
 class C {
   a: number;
   b?: number;
@@ -235,16 +236,16 @@ let c = new C();
 
 c.a = 12;
 c.a = undefined;
-Type 'undefined' is not assignable to type 'number'.
+//Type 'undefined' is not assignable to type 'number'.
 c.b = 13;
 c.b = undefined;
 c.b = null;
-Type 'null' is not assignable to type 'number | undefined'.
+//Type 'null' is not assignable to type 'number | undefined'.
 ```
 
 ### 2.2. Type guards and type assertions
 **get rid of the nullable types** in union using a **type guard**:
-```
+```bash
 function f(stringOrNull: string | null): string {
   if (stringOrNull === null) {
     return "default";
@@ -254,13 +255,13 @@ function f(stringOrNull: string | null): string {
 }
 ```
 **get rid of the nullable types** in union using **terser operators ``??``**:
-```
+```bash
 function f(stringOrNull: string | null): string {
   return stringOrNull ?? "default";
 }
 ```
 **get rid of the nullable types** in union using **type assertion ``as`` and postfix ``!`` in  ``identifier!``**:
-```
+```bash
 function getUser(id: string): UserAccount | undefined {
   return {} as any;
 }
@@ -282,7 +283,7 @@ user!.email!.length;
 - Aliasing are sometimes **similar to interfaces**, but **can name primitives**, unions, tuples, and any other types.
 - Aliasing **doesn’t actually create a new type** - it creates a new referenced name to that type. 
 - Aliasing a primitive **isn't so terribly to use**
-```
+```bash
 type Second = number;
 
 let timeInSecond: number = 10;
@@ -290,12 +291,12 @@ let time: Second = 10;
 ```
 
 - Aliasing can also be **generic**:
-```
+```bash
 type Container<T> = { value: T };
 ```
 
 - Aliasing can **refer to itself** in a property:
-```
+```bash
 type Tree<T> = {
   value: T;
   left?: Tree<T>;
@@ -304,7 +305,7 @@ type Tree<T> = {
 ```
 
 - And, aliasing can create some pretty mind-blending type =)):
-```
+```bash
 declare function getDriversLicenseQueue(): LinkedList<Person>;
 //   ^? Person & {next: LinkedList<Person>}
 //   ^? {name:string} & {next: LinkedList<{name:string}>}
@@ -337,7 +338,7 @@ people.next.next.next.name;
 ||||
 
 **ding new fields to an existing interface**
-```
+```bash
 interface Window {
   title: string
 }
@@ -354,7 +355,7 @@ window.ts.transpileModule(src, {});
 
 **type cannot be changed after being created**
 
-```
+```bash
 type Window = {
   title: string
 }
@@ -373,7 +374,7 @@ type Window = {
 
 ## 5. Enum Member Types
 Enum can be used as a type:
-```
+```bash
 // @errors: 2322
 enum ShapeKind {
   Circle,
@@ -398,7 +399,7 @@ let c: Circle = {
 
 ## 6. Polymorphic this types
 A polymorphic this type represents a type that is the subtype of the containing class or interface. This is called F-bounded polymorphism, a lot of people know it as the fluent API pattern. This makes hierarchical fluent interfaces much easier to express, for example. Take a simple calculator that returns this after each operation:
-```
+```bash
 class BasicCalculator {
   public constructor(protected value: number = 0) {}
   public currentValue(): number {
@@ -418,7 +419,7 @@ class BasicCalculator {
 let v = new BasicCalculator(2).multiply(5).add(1).currentValue();
 ```
 Since the class uses this types, you can extend it and the new class can use the old methods with no changes.
-```
+```bash
 class ScientificCalculator extends BasicCalculator {
   public constructor(value = 0) {
     super(value);
