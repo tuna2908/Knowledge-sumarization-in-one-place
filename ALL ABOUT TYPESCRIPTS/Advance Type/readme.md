@@ -202,19 +202,19 @@ The `--strictNullChecks` flag fixes this: when you declare a variable, it doesnâ
 ```bash
 let exampleString = "foo";
 exampleString = null;
-Type 'null' is not assignable to type 'string'.
+//Type 'null' is not assignable to type 'string'.
 
 let stringOrNull: string | null = "bar";
 stringOrNull = null;
 
 stringOrNull = undefined;
-Type 'undefined' is not assignable to type 'string | null'.
+//Type 'undefined' is not assignable to type 'string | null'.
 ```
 
 ### 2.1. Optional parameters and properties
 With --strictNullChecks, an ``optional`` parameter automatically adds | undefined:
 
-```
+```bash
 function f(x: number, y?: number) {
   return x + (y ?? 0);
 }
@@ -223,7 +223,7 @@ f(1, 2);
 f(1);
 f(1, undefined);
 f(1, null);
-Argument of type 'null' is not assignable to parameter of type 'number | undefined'.
+//Argument of type 'null' is not assignable to parameter of type 'number | undefined'.
 ```
 The same is true for optional properties:
 ```bash
