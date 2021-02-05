@@ -7,7 +7,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 ## ❯ Table of Contents
 
 1. [Type Guards and Differentiating Types](#typeGuardsAndDifferentiaingTypes)<br>
-1.1. [User-Defined Type Guards](#-user-defined-type-guards)<br>
+1.1. [User-Defined Type Guards](#userDefinedTypeGuards)<br>
 1.1.1. [Using type predicates]()<br>
 1.1.2. [Using the in operator]()<br>
 1.2. [typeof type guards](#-debugger-in-vscode)<br>
@@ -26,7 +26,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 
 
 
-## 1. Type Guards and Differentiating Types
+## 1. Type Guards and Differentiating Types <a name="typeGuardsAndDifferentiaingTypes"></a>
 
 Problem 1:
 **An Union type** contains **a number of types** can be mixed in just one type. Giving the union of type **Pet** of **Fish** and **Bird** 
@@ -64,7 +64,7 @@ if (fishPet.swim) {
 }
 ```
 Okay, still!! There exists **a more reliable way** to solve the problem using **User-Defined Type Guards**. Let's jump right into it.
-### 1.1. User-Defined Type Guards
+### 1.1. User-Defined Type Guards <a name="userDefinedTypeGuards"></a>
 
 It would be much better if once we performed the check, we could know the type of pet within each branch.
 TypeScript has something called **a type guard**, which:
@@ -73,7 +73,7 @@ TypeScript has something called **a type guard**, which:
 - or **typeof type guards** as well as **instanceof type guards**
 
 
-#### 1.1.1. Using type predicates
+#### 1.1.1. Using type predicates <a name="typeGuardsAndDifferentiaingTypes"></a>
 To define a type guard => Define a function returning type is **a type predicate syntax**:
 ```bash
 function isFish(pet: Fish | Bird): pet is Fish {
