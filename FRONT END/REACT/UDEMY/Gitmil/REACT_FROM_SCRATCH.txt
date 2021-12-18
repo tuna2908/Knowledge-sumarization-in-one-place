@@ -1,0 +1,318 @@
+REACT PROJECT STRUCTURE
+- familiar yourself create-react-app
+
+- install node :
+	- Select (latest one - LTS  -long term support)
+		- include npm and npx
+		- using npx to create project
+	- using NVM
+		- multiple version of node
+		- easily to switch to version
+	- using direct download
+- install create-react-app globally
+	- npx create-react-app create react app
+- npm start - run on localhost
+
+- package config: package.json
+	- private
+	- dependencies
+	- script: npm run
+		build using: babel, webpack..
+  	- eslintConfig: syntax checker, format..
+	- browser-list: support browser for your react-app
+
+- package-lock: lock version of dependencies
+
+- eject
+	- wp config
+	- run eject
+	- this cmd break things =))
+	- script (node files)
+	- config (webpack, jest config)
+
+- SASS (advanced css (var, etc))
+	- css -> scss
+	- install node-sass: convert css - > scss
+
+- Linter (formating)
+	- PRETTIER: formatter
+	- LINTER: warning, static checker for configurable syntax, uncontroller react code (console evw)
+		- add .eslintrc.json (rules)
+			- no-console: error | off | warn
+			- no-var:...
+		- reference: https://eslint.org/docs/rules/
+
+
+FUNDEMENTAL CONCEPTS
+1. JSX (javascript xml)
+	- other (angular, vue): clear template (html + js)
+	- react (only js allowed) => JSX (JS + XML) => Babel => React Object (virtual DOM eg: React.createElement) => HTML + CSS
+2. STYLING component
+- inline style (style props)
+	- combine inline: style = {{...styleA, ...styleB}}
+- css (className props)
+	- combine className = "classA classB"
+
+3. Reusable component
+- export 
+	- nameless function
+	- arrow function (BE - test better)
+	- normal function (best practices)
+
+3. props
+- pass as
+	- props name
+	- children
+
+4. Fragments: tell react not adding additional div (cause it sometimes might cause the styling issues)
+- syntax:
+	- import {Fragment} from react;
+	- empty tag: <></>
+	- array syntax (not recommend): [<div>,<div>]
+
+5. Destructuring props
+- syntax
+	- normal: function COMP(props)
+	- destructuring technique: function COMP({propsName1, propsName2, ...arg})
+
+6. Conditional Rendering
+- syntax:
+	- using If
+	- using: {condition && <Element>} || {condition || <Element>}
+
+
+7. HOC
+- about: a function take Comp and return enhanced Comp
+- syntax: HOC => Component => props => NewComponent
+- example: 
+	- adding new props: HOC => Component => props => {
+		const newProps = {...props, ...newProps}
+		return <Component {...newProps} > 
+	}
+	- remove props: HOC => Component => props => {
+		const newProps = {...props}
+		delete newProps["propsName"]
+		return <Component {...newProps} > 
+	}
+
+8. useState
+- note concepts: array destructuring in useState
+
+9. How hooks works internally (completely useless :))
+
+10. complex state
+- NOte: use Symbol() to generate the unique key
+
+
+EVENT HANDLING
+1. Adding Event
+- onDoubleClick to change Editable
+- onKeyPress
+- onClick to remove: filter + condition
+
+2. build custom hooks
+- eg: useList: removeItem, updateItem, list
+
+3. onchange Event (useless as well :))
+
+4. useRef
+- createRef: refname = useRef()
+
+5. forward Ref
+- Ref cant be normally transfer as props - use HOC React.forwardRef(component)
+- ref must be pass as outside props eg: Input({...props}, ref)
+
+LIFECIRCLE COMPONENT
+1. Life circle in Class
+- JSX -> Virtual DOM (React Object) -> DOM
+
+2. useEffect with cleanup mechanism
+- useEffect to add listener
+- useEffect to add interval
+- useEffect to fetch data
+
+3. useMemo aka component should update
+- handle component rendering: memoComponent = useMemo(CB=>component, []); 
+
+4. useLayoutEffect
+- just as useEffect but
+	- syncronously: DOM mutation -> useLayoutEffect (compute, measure layout) -> finish rendererd
+	- useLayoutEffects can cause Visual artifacts
+
+5. react Devtools (debugger for react)
+- useDebugValue: display value in RDT
+- sample syntax: useDebugValue(isOnline ? 'Online' : 'Offline');
+
+6. useContext
+- Step 1: create context and export
+- Step 2: Wrap Context.Provider
+	- Provide default value
+- Step 3: useContext to get value =))
+	- eg: value = useContext(createContext);
+- Step 4: make it complicated by
+	- contextValue = {[state, setState]} so that you really change value everywhere
+- Note: context only work in component. not render function in React Route
+
+REACT ROUTER
+1. Setting route: react-router-dom
+	- BrowserRouter: container
+	- Route: a page description, with props:
+		- path: /user/:username
+			- example get Params from path: match.params.username
+		- exact: query accuracy
+
+	- Link: simple route
+		- to: go to path, eg: tp = "about"
+	- NavLink: route link with diff styles
+		- activeStyle: inline jsx
+		- activeClassName: css style
+	- Redirect: as it called, redirect to ur wanted path
+	- Prompt: are you sure u finished the form =))
+		- when: condition
+		- message: cb function => true: pass or message
+
+
+REDUX - global state management
+1. Fundemental
+- Reducer:
+	- reducer state
+	- reducer function: used to update State
+		- action: {type, payload}
+		- state: initialState
+- action: 
+	- actionType: help nav reducer
+	- payload: additional data info
+- store: combine reducer
+- Component:
+	- dispatch action => reducer take that action => update global state => update component => that's it!
+
+2. React + Redux Hook
+- step 1: create redux folder
+	- create action files
+		- export your action funcions (function that reture {type, payload})
+	- create reducer folder
+		- init state
+		- reducertion...
+	- create store.js
+		- combine the reducer: combineReducer({...reducers})
+- step 2: plug in redux into react
+	- import provider
+	- supplement store
+- step 3: using
+	- globalValu = useSelector(state => reducerName.yourStateInReducer)
+	- useDispatch(actionFunction)
+
+3. Redux Thunk
+- middleware: install redux-thunk
+- applyMidlleware
+	createStore({...combineReducers}, applyMiddleware(thunk))
+- Create middleWare action funcion
+	eg MWFunc => async (dispatch) => { await asyncThings; dispatch(normalAction)}
+
+4. useReducer: like redux but local =))
+- useReducer + userContext = Global State management =))
+- syntax: pretty similar to redux
+	- define init state
+	- define localReducerFunction: (state, action)
+	- import useReducer
+		- [state, dispatch] = useReducer(reducerFunc, initState)
+
+
+5. React + Mobx
+- installing: mobx and mobx-react-lite
+- usage
+	- import {observer, userObservable} from 'mobx-lite'
+	- wrap observer(root_component)
+	- define store
+		store = useObserverable({state, actionFunction})
+	- dispatch: store.oneActioonFunc
+
+HOOK TESTING
+1. TESTING PHILOSOPHY
+- Unit tests: isolation testing (function, component) work properly
+	- testing framework: jest
+	- Testing Lib - Testing Enhancer
+		- enzyme: ABnB - Dom navigation in testing
+		- react-testing-library: more popular nowadays
+- Acceptance tests: like end to end (integration) test on a fake env (mock api calls, entire dom)
+	- Cypress
+	- Jest + Puppeteer (by gg)
+	- Bigtest/ TestCafe
+- End to end test
+	- lelenium with java, python (auto test)
+
+2. Unit test with jest
+- install: testing-library/react react-test-render jest-dom --save-dev 
+- Proj structure
+	- Component/Comp1
+		- __test__
+			- name in this format: button.test.js
+		- css, component file
+- steps
+	- defined 'data-testid'	
+	- defined .test.js file
+afterEach(cleanup);	//cleanup after every test, not adding into dom
+
+it("renders without crashing", () => {
+  const div = document.createElement("div");
+  ReactDOM.render(<Button />, div);
+});
+
+it("renders button correctly", () => {
+  const { getByTestId } = render(<Button label="click me please" />);	//return dom
+  expect(getByTestId("button")).toHaveTextContent("click me please");	//compare expect result
+});
+
+it("matches snapshot 1", () => {
+  const tree = renderer.create(<Button label="save" />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+	- npm run test
+
+- Snapshot test: test the way component rendered
+
+
+BUILD YOUR OWN REUSABLE COMPONENT
+1. Requirement
+- type:
+	- Primary components: button, widget... 
+	- fragment = multiple primary component
+		- eg: nav bar, top bar...
+	- layouts: container
+- Principle
+	- isolated: inside a component folder
+	- No Biz logic (reusable)
+	- Have own style: have access to global style or its style
+	- Have data-testid: testing purpose
+		- easy to get component, rather than parsing itself (selenium)
+
+- Ways to build
+	- from sratch (large company)
+	- use 3rd library (component lib)
+		- material UI - gg
+		- Ant Design
+	- mixed: inherance 3rd party style
+	- repo and package
+
+2. Build your own
+- watch example
+
+3. Stylguidist (documentation and testing for react comp)
+- install as dev dependencies
+
+
+TYPE CHECKING
+PROPTYPE
+- builtin create-react-app
+- syntax
+	- miport propstupes from prop-type
+	- Component.propTypes: Object = {propName1: Propstype.string|func|shape({...}).isRequired|oneOf}
+FLOW
+- dev by FB
+- npm flow-bin --save-dev
+- add script: flow - npm run flow
+- generated flow.config
+- add type checking
+	- like ts: type MyComProps = {name:string}
+	- MycomProps.defaultProps = {name:John}
+TS
