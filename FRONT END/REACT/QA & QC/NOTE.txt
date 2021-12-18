@@ -1,0 +1,52 @@
+INTRODUCTION
+react-testing-lib
+Philosophy
+	- collection of best testing react practices
+	- focus testing the way user using  (specification)
+	- not internal implementation (code runiing test - unit tét)
+Difference things
+	- Find element by "accessibility marker" instead of testID
+
+Provide DOM for tests
+
+Jest - test runner
+	=> find test (in dir)
+	=> run test (by script)
+	=> determine result => in log
+
+
+CREAT-REACT-APP, include
+	- configuration
+	- webpack, babel
+	- webserver (run js code)
+	- testing Lib
+
+Jest and Jest-DOM Assertions
+=> decide the test failed or not
+- start with expext + argument (subject)
+- matcher
+	- DOM matcher: toBeInTheDocument(), toBeVisible()
+	- normal matcher: toBe('hello')
+
+- jest-dom: 
+	- comes with create=react=app
+
+
+JEST
+React Testinng Lib, provide
+	- render virual dom
+	- searching element in virtual dom
+	- interact with VD (clicking..)
+Need Test-runner to run
+	- Make assertion, run test..
+	- test runner - Jest
+		- comwith react app
+		- suggested
+		- other like mocha, japmine
+
+ABout watchmode
+	- watch changes in file (from last commit) => commit no test :3
+	- only run when changes
+
+
+	
