@@ -48,5 +48,15 @@ ABout watchmode
 	- watch changes in file (from last commit) => commit no test :3
 	- only run when changes
 
+WHAT SHOULD FUNCTIONAL TESTS CATCH? AND REFACTOR
+1. COPY THE IMAGE
+2. SUMMARY
+- TEST CODE PROCESSES
+	- Things related to code processes
+		- stats, data from the server, logical constraints
+	- Not static cosmetics (static style or html tags on the screen)
+		- should be checked by acceptance testing (selenium, cypress)
+	- Depends on you to define the test
+		- eg: if the number is from the server => put in funcional tests
 
 	
