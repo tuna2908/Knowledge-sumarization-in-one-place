@@ -120,7 +120,9 @@ EVENT HANDLING
 
 5. forward Ref
 - Ref cant be normally transfer as props - use HOC React.forwardRef(component)
-- ref must be pass as outside props eg: Input({...props}, ref)
+- ref must be pass as outside props 
+	- eg: Input({...props}, ref)
+	- <Input ref={firstNameRef} />
 
 LIFECIRCLE COMPONENT
 1. Life circle in Class
@@ -140,6 +142,8 @@ LIFECIRCLE COMPONENT
 	- useLayoutEffects can cause Visual artifacts
 
 5. react Devtools (debugger for react)
+- install Chrome extension
+	- tab React => debug state, props
 - useDebugValue: display value in RDT
 - sample syntax: useDebugValue(isOnline ? 'Online' : 'Offline');
 
@@ -167,7 +171,7 @@ REACT ROUTER
 		- activeStyle: inline jsx
 		- activeClassName: css style
 	- Redirect: as it called, redirect to ur wanted path
-	- Prompt: are you sure u finished the form =))
+	- Prompt: are you sure u finished the form =)). Props are:
 		- when: condition
 		- message: cb function => true: pass or message
 
