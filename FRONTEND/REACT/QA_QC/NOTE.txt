@@ -59,4 +59,28 @@ WHAT SHOULD FUNCTIONAL TESTS CATCH? AND REFACTOR
 	- Depends on you to define the test
 		- eg: if the number is from the server => put in funcional tests
 
-	
+SECION 7 FINAL EXAM
+INTRO TO FINAL EXAM
+- Picture
+
+ADDING NEW HANDLER
+- Post Handler
+
+DEBUGGING TIPS
+- first Pics
+	- screen.debug(): print the DOM
+	- try finding the begining of the test
+		- find error
+
+- common error (2nd picture)
+	- unable to find role => try print the DOM
+
+
+FINAL EXAM CODE
+- new MSW Handler post order (when click accept term and submit)
+- new Component: OrderConfirmation
+- Defined code phase via context: [codePhase, setter]
+- pay attention to debugging tools
+
+
+
